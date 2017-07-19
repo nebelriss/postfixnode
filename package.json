@@ -1,0 +1,16 @@
+{
+  "name": "postfixnode",
+  "version": "1.0.0",
+  "description": "Webapp to configure postfix entries in a mysql database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michel Heiniger",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.15.3",
+    "handlebars": "^4.0.10",
+    "mysql": "^2.13.0"
+  }
+}

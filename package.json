@@ -10,7 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "express": "^4.15.3",
-    "handlebars": "^4.0.10",
+    "hbs": "^4.0.1",
     "mysql": "^2.13.0"
   }
 }

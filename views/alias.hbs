@@ -1,0 +1,24 @@
+
+  {{> header}}
+  {{> navbar}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>source</th>
+        <th>destination</th>
+        <th>domain</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each rows}}
+        <tr>
+          <th scope="row">{{id}}</th>
+          <td>{{source}}</td>
+          <td>{{{destination}}}</td>
+          <td>{{domain}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{> footer}}

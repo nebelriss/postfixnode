@@ -1,0 +1,22 @@
+
+  {{> header}}
+  {{> navbar}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>domain</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each rows}}
+        <tr>
+          <th scope="row">{{id}}</th>
+          <td>{{{name}}}</td>
+          <td>{{email}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{> footer}}

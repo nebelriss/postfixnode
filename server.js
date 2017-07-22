@@ -28,6 +28,8 @@ app.set('view engine', 'hbs');
 
 // helpers
 
+// static routing
+app.use(express.static(__dirname + "/public"));
 
 // root
 app.get('/', (req, res) => {

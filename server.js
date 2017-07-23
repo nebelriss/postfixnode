@@ -2,9 +2,16 @@
 const express = require('express');
 const hbs = require('hbs');
 const mysql = require('mysql')
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 
 // init express
 var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 // Open MySQL-Connection
 var con = mysql.createConnection({
@@ -78,6 +85,12 @@ app.get('/domains', (req, res) => {
     } else {
       console.log('Error while performing Query.');
     }});
+});
+
+app.post('/domains', (req, res) => {
+  console.log(req.body);
+  res.status(200).send();
+  return;
 });
 
 app.listen(3000, () => {

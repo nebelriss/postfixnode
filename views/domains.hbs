@@ -1,19 +1,28 @@
-
-  {{> header}}
-  <table class="table">
-    <thead>
+ {{> header}}
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each rows}}
       <tr>
-        <th>#</th>
-        <th>domain</th>
+        <th scope="row">{{id}}</th>
+        <td>{{name}}</td>
       </tr>
-    </thead>
-    <tbody>
-      {{#each rows}}
-        <tr>
-          <th scope="row">{{id}}</th>
-          <td>{{name}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    {{/each}}
+  </tbody>
+</table>
+<form action="" method="post">
+  <div class="form-group">
+  <label for="POST-name">Name:</label>
+  <input id="POST-name" type="text" name="name">
+  <input type="submit" value="Save">
+</div>
+</form>
+<div class="addButton">
+  <button type="button" class="btn btn-primary">Add Domain</button>
+</div>
 {{> footer}}

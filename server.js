@@ -1,10 +1,14 @@
 // imports
 const express = require('express');
 const hbs = require('hbs');
-const mysql = require('mysql')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+
+const db = require('./db');
+const domain = require('./models/domain');
+const user = require('./models/user');
+const alias = require('./models/alias');
 
 // init express
 var app = express();
@@ -14,20 +18,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
 // Open MySQL-Connection
-var con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'node',
-  database: 'mailserver'
-});
-
-con.connect(function(err){
-if(!err) {
-    console.log("Database is connected ... nn");
-} else {
-    console.log("Error connecting database ... nn");
-}
-});
+db.connect(db.MODE_DEV, (err) => {
+  if (err) {
+    console.log('Unable to connect to MySQL.');
+    process.exit(1);
+  } else {
+    console.log('Connected to MySQL.');
+  }
+})
 
 hbs.registerPartials(__dirname + '/views/partials');
 
@@ -46,45 +44,41 @@ app.get('/', (req, res) => {
 
 // Users
 app.get('/users', (req, res) => {
-
-  con.query('select u.id, d.name, u.email from virtual_users u, virtual_domains d where d.id = u.domain_id order by u.id asc;', function(err, rows, fields) {
-    if (!err) {
-      // render if no error
+  user.getAll((err, rows) => {
+    if (err) {
+      res.status(404).send();
+    } else {
       res.render('users.hbs', {
         rows: rows
       });
-    } else {
-      console.log('Error while performing Query.');
-    }});
-
+    };
+  });
 });
 
 // Alias
 app.get('/alias', (req, res) => {
-
-  con.query('SELECT v.id, v.source, v.destination, d.name as domain FROM virtual_aliases v, virtual_domains d WHERE d.id = v.domain_id order by v.destination asc;', function(err, rows, fields) {
-    if (!err) {
-      // render if no error
+  alias.getAll((err, rows) => {
+    if (err) {
+      res.status(404).send();
+    } else {
       res.render('alias.hbs', {
         rows: rows
       });
-    } else {
-      console.log('Error while performing Query.');
-    }});
-
+    };
+  });
 });
 
 // Domains
 app.get('/domains', (req, res) => {
-  con.query('select id, name from virtual_domains order by id asc;', function(err, rows, fields) {
-    if (!err) {
-      // render if no error
+  domain.getAll((err, rows) => {
+    if (err) {
+      res.status(404).send();
+    } else {
       res.render('domains.hbs', {
         rows: rows
       });
-    } else {
-      console.log('Error while performing Query.');
-    }});
+    };
+  });
 });
 
 app.post('/domains', (req, res) => {

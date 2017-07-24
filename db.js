@@ -6,9 +6,9 @@ var state = {
   mode: null
 };
 
-var DEV_DB = 'mailserver';
-var TEST_DB = 'test_mailserver';
-var PRODUCTION_DB = 'dev_mailserver';
+const DEV_DB = 'mailserver';
+const TEST_DB = 'test_mailserver';
+const PRODUCTION_DB = 'dev_mailserver';
 
 exports.MODE_DEV = 'mode_dev';
 exports.MODE_TEST = 'mode_test';

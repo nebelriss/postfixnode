@@ -31,7 +31,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 app.set('view engine', 'hbs');
 
-// helpers
 
 // static routing
 app.use(express.static(__dirname + "/public"));
@@ -82,9 +81,14 @@ app.get('/domains', (req, res) => {
 });
 
 app.post('/domains', (req, res) => {
-  console.log(req.body);
-  res.status(200).send();
-  return;
+  domain.create(req.body.domain, (err, result) => {
+    if (err) {
+      res.status(404).send();
+    } else {
+      console.log('done');
+      res.status(200).send();
+    };
+  });
 });
 
 app.listen(3000, () => {

@@ -20,7 +20,22 @@
       {{/each}}
     </tbody>
   </table>
-  <div class="addButton">
-    <button type="button" class="btn btn-primary">Add Alias</button>
-  </div>
+  <form action="" method="post">
+    <label for="POST_source">Source:</label>
+    <input type="text" name="source" id="POST_source">
+
+    <label for="POST_destination">Destination:</label>
+    <input type="text" name="destination" id="POST_destination">
+
+    <label for="POST_domain">Domain:</label>
+    <select name="domain" id="POST_domain">
+      {{#each domains}}
+        <option value="{{{id}}}">{{{name}}}</option>
+      {{/each}}
+    </select>
+    <div class="addButton">
+      <button type="submit" class="btn btn-primary" value="Save" name="AddAliasBtn">Add Alias</button>
+    </div>
+  </form>
+
 {{> footer}}

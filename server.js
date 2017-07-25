@@ -24,13 +24,12 @@ db.connect(db.MODE_DEV, (err) => {
     process.exit(1);
   } else {
     console.log('Connected to MySQL.');
-  }
-})
+  };
+});
 
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.set('view engine', 'hbs');
-
 
 // static routing
 app.use(express.static(__dirname + "/public"));
@@ -56,16 +55,36 @@ app.get('/users', (req, res) => {
 
 // Alias
 app.get('/alias', (req, res) => {
+
+  // get all Domains for dropdown in insert
+  var domains;
+  domain.getAll((err, rows) => {
+    if (err) domains = null;
+    domains = rows;
+  });
+
+  // get all alias entries
   alias.getAll((err, rows) => {
     if (err) {
       res.status(404).send();
     } else {
       res.render('alias.hbs', {
-        rows: rows
+        rows: rows,
+        domains: domains
       });
     };
   });
 });
+
+app.post('/alias', (req, res) => {
+  alias.create(req.body, (err, result) => {
+    if (err) {
+      res.status(400).send();
+    } else {
+      res.status(200).send();
+    }
+  })
+})
 
 // Domains
 app.get('/domains', (req, res) => {
@@ -85,7 +104,6 @@ app.post('/domains', (req, res) => {
     if (err) {
       res.status(404).send();
     } else {
-      console.log('done');
       res.status(200).send();
     };
   });

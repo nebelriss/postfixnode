@@ -6,9 +6,9 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
 const db = require('./db');
-const domain = require('./models/domain');
-const user = require('./models/user');
-const alias = require('./models/alias');
+const usersRoutes = require('./routes/users_routes');
+const aliasRoutes = require('./routes/alias_routes');
+const domainsRoutes = require('./routes/domain_routes');
 
 // init express
 var app = express();
@@ -27,8 +27,10 @@ db.connect(db.MODE_DEV, (err) => {
   };
 });
 
+// partials
 hbs.registerPartials(__dirname + '/views/partials');
 
+// set view engine
 app.set('view engine', 'hbs');
 
 // static routing
@@ -40,95 +42,12 @@ app.get('/', (req, res) => {
   });
 });
 
-// Users
+// routes
+app.use('/users', usersRoutes);
+app.use('/alias', aliasRoutes);
+app.use('/domains', domainsRoutes);
 
-// get all Domains for dropdown in insert
-var domains;
-domain.getAll((err, rows) => {
-  if (err) domains = null;
-  domains = rows;
-});
-
-// get all users
-app.get('/users', (req, res) => {
-  user.getAll((err, rows) => {
-    if (err) {
-      res.status(404).send();
-    } else {
-      res.render('users.hbs', {
-        rows: rows,
-        domains: domains
-      });
-    };
-  });
-});
-
-app.post('/users', (req, res) => {
-  user.create(req.body, (err, result) => {
-    if (err) {
-      res.status(400).send();
-    } else {
-      res.status(200).send();
-    };
-  });
-});
-
-// Alias
-app.get('/alias', (req, res) => {
-
-  // get all Domains for dropdown in insert
-  var domains;
-  domain.getAll((err, rows) => {
-    if (err) domains = null;
-    domains = rows;
-  });
-
-  // get all alias entries
-  alias.getAll((err, rows) => {
-    if (err) {
-      res.status(404).send();
-    } else {
-      res.render('alias.hbs', {
-        rows: rows,
-        domains: domains
-      });
-    };
-  });
-});
-
-app.post('/alias', (req, res) => {
-  alias.create(req.body, (err, result) => {
-    if (err) {
-      res.status(400).send();
-    } else {
-      res.status(200).send();
-    };
-  });
-});
-
-// Domains
-app.get('/domains', (req, res) => {
-  domain.getAll((err, rows) => {
-    if (err) {
-      res.status(404).send();
-    } else {
-      res.render('domains.hbs', {
-        rows: rows
-      });
-    };
-  });
-});
-
-app.post('/domains', (req, res) => {
-  domain.create(req.body.domain, (err, result) => {
-    if (err) {
-      res.status(404).send();
-    } else {
-      res.status(200).send();
-    };
-  });
-});
-
+// start
 app.listen(3000, () => {
   console.log('Sever is up and running.');
 });

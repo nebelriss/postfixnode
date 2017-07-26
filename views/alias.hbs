@@ -1,41 +1,39 @@
-
-  {{> header}}
-  <table class="table">
-    <thead>
+{{> header}}
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>source</th>
+      <th>destination</th>
+      <th>domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each rows}}
       <tr>
-        <th>#</th>
-        <th>source</th>
-        <th>destination</th>
-        <th>domain</th>
+        <th scope="row">{{id}}</th>
+        <td>{{source}}</td>
+        <td>{{{destination}}}</td>
+        <td>{{domain}}</td>
       </tr>
-    </thead>
-    <tbody>
-      {{#each rows}}
-        <tr>
-          <th scope="row">{{id}}</th>
-          <td>{{source}}</td>
-          <td>{{{destination}}}</td>
-          <td>{{domain}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-  <form action="" method="post">
-    <label for="POST_source">Source:</label>
-    <input type="text" name="source" id="POST_source">
+    {{/each}}
+  </tbody>
+</table>
+<form action="" method="post">
+  <label for="POST_source">Source:</label>
+  <input type="text" name="source" id="POST_source">
 
-    <label for="POST_destination">Destination:</label>
-    <input type="text" name="destination" id="POST_destination">
+  <label for="POST_destination">Destination:</label>
+  <input type="text" name="destination" id="POST_destination">
 
-    <label for="POST_domain">Domain:</label>
-    <select name="domain" id="POST_domain">
+  <label for="POST_domain">Domain:</label>
+  <select name="domain" id="POST_domain">
       {{#each domains}}
         <option value="{{{id}}}">{{{name}}}</option>
       {{/each}}
     </select>
-    <div class="addButton">
-      <button type="submit" class="btn btn-primary" value="Save" name="AddAliasBtn">Add Alias</button>
-    </div>
-  </form>
-
+  <div class="addButton">
+    <button type="submit" class="btn btn-primary" value="Save" name="AddAliasBtn">Add Alias</button>
+  </div>
+</form>
 {{> footer}}

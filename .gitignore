@@ -1,6 +1,7 @@
 # Custom
 .tern-project
 config/mysql-config.json
+playground/
 
 
 # Genearated

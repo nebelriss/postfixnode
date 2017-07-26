@@ -1,24 +1,37 @@
-
-  {{> header}}
-  <table class="table table-hover">
-    <thead>
+{{> header}}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>domain</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each rows}}
       <tr>
-        <th>#</th>
-        <th>domain</th>
-        <th>email</th>
+        <th scope="row">{{id}}</th>
+        <td>{{{name}}}</td>
+        <td>{{email}}</td>
       </tr>
-    </thead>
-    <tbody>
-      {{#each rows}}
-        <tr>
-          <th scope="row">{{id}}</th>
-          <td>{{{name}}}</td>
-          <td>{{email}}</td>
-        </tr>
+    {{/each}}
+  </tbody>
+</table>
+<form action="" method="post">
+  <label for="POST_user">User/Email:</label>
+  <input type="text" name="user" id="POST_user">
+
+  <label for="POST_password">Password:</label>
+  <input type="password" name="password" id="POST_password">
+
+  <label for="POST_domain">Domain:</label>
+  <select name="domain" id="POST_domain">
+      {{#each domains}}
+        <option value="{{{id}}}">{{{name}}}</option>
       {{/each}}
-    </tbody>
-  </table>
+    </select>
   <div class="addButton">
-    <button type="button" class="btn btn-primary">Add User</button>
+    <button type="submit" class="btn btn-primary" value="Save" name="AddAliasBtn">Add User</button>
   </div>
+</form>
 {{> footer}}

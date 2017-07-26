@@ -41,14 +41,34 @@ app.get('/', (req, res) => {
 });
 
 // Users
+
+// get all Domains for dropdown in insert
+var domains;
+domain.getAll((err, rows) => {
+  if (err) domains = null;
+  domains = rows;
+});
+
+// get all users
 app.get('/users', (req, res) => {
   user.getAll((err, rows) => {
     if (err) {
       res.status(404).send();
     } else {
       res.render('users.hbs', {
-        rows: rows
+        rows: rows,
+        domains: domains
       });
+    };
+  });
+});
+
+app.post('/users', (req, res) => {
+  user.create(req.body, (err, result) => {
+    if (err) {
+      res.status(400).send();
+    } else {
+      res.status(200).send();
     };
   });
 });
@@ -82,9 +102,9 @@ app.post('/alias', (req, res) => {
       res.status(400).send();
     } else {
       res.status(200).send();
-    }
-  })
-})
+    };
+  });
+});
 
 // Domains
 app.get('/domains', (req, res) => {

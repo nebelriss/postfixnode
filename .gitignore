@@ -3,6 +3,9 @@
 config/mysql-config.json
 playground/
 
+/.eslintrc.json
+/.eslintignore
+
 
 # Genearated
 # Created by https://www.gitignore.io/api/node,macos,linux,windows

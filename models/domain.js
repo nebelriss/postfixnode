@@ -16,5 +16,18 @@ exports.getAll = (done) => {
       return done(err);
     };
     done(null, rows);
+// get entry by name
+exports.findById = (done) => {
+  db.get().query('SELECT id, name FROM virtual_domains WHERE name = ?;', (err, rows) => {
+    if (err) return done(err);
+    return done(null, rows);
+  });
+};
+
+// delete entry
+exports.deleteByName = (domain, done) => {
+  db.get().query('DELETE FROM virtual_domains WHERE name = ?', domain, (err, rows) => {
+    if (err) return done(err);
+    return done(null, rows);
   });
 };

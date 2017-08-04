@@ -22,6 +22,10 @@ router.post('/', (req, res) => {
     } else {
       res.status(200).send();
     };
+// delete an entry
+router.delete('/:domain', (req, res) => {
+  domain.deleteByName(req.params.domain, (err, result) => {
+    res.status(200).send();
   });
 });
 

@@ -1,17 +1,17 @@
 const express = require('express');
-const user = require('../models/user')
+const user = require('../models/user');
 const domain = require('../models/domain');
 
-var router = express.Router();
-var domains;
+const router = express.Router();
+let domains;
 
 // get all users
 router.get('/', (req, res) => {
-
   // get all Domains for dropdown in insert
   domain.getAll((err, rows) => {
-    if (err)
+    if (err) {
       domains = null;
+    }
     domains = rows;
   });
 
@@ -21,10 +21,9 @@ router.get('/', (req, res) => {
       res.status(404).send();
     } else {
       res.render('users.hbs', {
-        rows: rows,
-        domains: domains
-      });
-    };
+        rows,
+        domains });
+    }
   });
 });
 
@@ -35,7 +34,7 @@ router.post('/', (req, res) => {
       res.status(400).send();
     } else {
       res.status(200).send();
-    };
+    }
   });
 });
 

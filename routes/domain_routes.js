@@ -1,7 +1,7 @@
 const express = require('express');
 const domain = require('../models/domain');
 
-var router = express.Router();
+const router = express.Router();
 
 // get all domains
 router.get('/', (req, res) => {
@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
     if (err) {
       res.status(404).send();
     } else {
-      res.render('domains.hbs', {rows: rows});
-    };
+      res.render('domains.hbs', { rows });
+    }
   });
 });
 
@@ -21,7 +21,10 @@ router.post('/', (req, res) => {
       res.status(404).send();
     } else {
       res.status(200).send();
-    };
+    }
+  });
+});
+
 // delete an entry
 router.delete('/:domain', (req, res) => {
   domain.deleteByName(req.params.domain, (err, result) => {

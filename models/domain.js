@@ -1,21 +1,26 @@
-var db = require('../db');
+const db = require('../db');
 
+// Create a new entry
 exports.create = (domain, done) => {
-  var values = [domain];
+  const values = [domain];
   db.get().query('INSERT INTO virtual_domains (name) values(?);', values, (err, result) => {
     if (err) {
-      done(err);
-    };
-    done(null, result.insertId);
+      return done(err);
+    }
+    return done(null, result.insertId);
   });
 };
 
+// get all existing records
 exports.getAll = (done) => {
   db.get().query('SELECT id, name FROM virtual_domains ORDER BY id ASC;', (err, rows) => {
     if (err) {
       return done(err);
-    };
-    done(null, rows);
+    }
+    return done(null, rows);
+  });
+};
+
 // get entry by name
 exports.findById = (done) => {
   db.get().query('SELECT id, name FROM virtual_domains WHERE name = ?;', (err, rows) => {

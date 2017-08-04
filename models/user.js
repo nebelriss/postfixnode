@@ -1,12 +1,13 @@
-var db = require('../db');
-var crypto = require('crypto');
+const db = require('../db');
+const crypto = require('crypto');
 
-var hashValue = (value) => {
-  return "{SHA256-CRYPT}$5$" + crypto.createHash('sha256').update(value).digest('base64');
-}
+const hashValue = (value) => {
+  const shaValue = '{SHA256-CRYPT}$5$' + crypto.createHash('sha256').update(value).digest('base64');
+  return shaValue;
+};
 
 exports.create = (newUser, done) => {
-  var values = [
+  const values = [
     newUser.domain,
     newUser.user,
     hashValue(newUser.password)];
@@ -20,7 +21,7 @@ exports.getAll = (done) => {
   db.get().query('SELECT u.id, d.name, u.email FROM virtual_users u, virtual_domains d WHERE d.id = u.domain_id ORDER BY u.id ASC;', (err, rows) => {
     if (err) {
       return done(err);
-    };
-    done(null, rows);
+    }
+    return done(null, rows);
   });
 };

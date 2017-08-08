@@ -21,6 +21,19 @@ $(".delete-domain").on("click", function() {
   });
 });
 
+$('.delete-user').on('click', function() {
+  var userEmail = $(this).closest('tr').children('.userEmail').text();
+
+  // delete to /users/:user
+  $.ajax({
+    url: '/users/' + userEmail,
+    type: 'DELETE',
+    success: function(result) {
+      location.reload();
+    }
+  });
+});
+
 var showModalMessage = function(message, callback) {
   // TODO
 }

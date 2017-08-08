@@ -25,3 +25,10 @@ exports.getAll = (done) => {
     return done(null, rows);
   });
 };
+
+exports.deleteByName = (userEmail, done) => {
+  db.get().query('DELETE FROM virtual_users WHERE email = ?', userEmail, (err, rows) => {
+    if (err) return done(err);
+    return done(null, rows);
+  });
+};

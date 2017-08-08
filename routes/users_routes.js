@@ -38,4 +38,10 @@ router.post('/', (req, res) => {
   });
 });
 
+router.delete('/:user', (req, res) => {
+  user.deleteByName(req.params.user, (err, result) => {
+    res.status(200).send();
+  });
+});
+
 module.exports = router;

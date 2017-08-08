@@ -16,3 +16,10 @@ exports.getAll = (done) => {
     return done(null, rows);
   });
 };
+
+exports.deleteByName = (aliasName, done) => {
+  db.get().query('DELETE FROM virtual_aliases WHERE source = ?', aliasName, (err, rows) => {
+    if (err) return done(err);
+    return done(null, rows);
+  });
+};

@@ -12,9 +12,10 @@
     {{#each rows}}
       <tr>
         <th scope="row">{{id}}</th>
-        <td>{{source}}</td>
+        <td class="aliasSource">{{source}}</td>
         <td>{{{destination}}}</td>
         <td>{{domain}}</td>
+        <td><i class="fa fa-pencil edit-user" aria-hidden="true"></i><i class="fa fa-trash delete-alias" aria-hidden="true"></i></td>
       </tr>
     {{/each}}
   </tbody>

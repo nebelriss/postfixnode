@@ -1,14 +1,14 @@
 // register clicklistener for edit
-$(".edit-domain").on("click", function() {
+$('.edit-domain').on('click', function() {
   console.log($(this).parent().text);
 });
 
 // register clicklistener for delete
-$(".delete-domain").on("click", function() {
+$('.delete-domain').on('click', function() {
   // find the .domain cell in the table row
-  var domainName = $(this).closest("tr").children(".domain").text();
+  var domainName = $(this).closest('tr').children('.domain').text();
   // show modal message
-  showModalMessage("test", () => {
+  showModalMessage('test', () => {
 
   });
   // DELETE to /domains/:domain
@@ -27,6 +27,19 @@ $('.delete-user').on('click', function() {
   // delete to /users/:user
   $.ajax({
     url: '/users/' + userEmail,
+    type: 'DELETE',
+    success: function(result) {
+      location.reload();
+    }
+  });
+});
+
+
+$('.delete-alias').on('click', function() {
+  var aliasName = $(this).closest('tr').children('.aliasSource').text();
+
+  $.ajax({
+    url: 'alias/' + aliasName,
     type: 'DELETE',
     success: function(result) {
       location.reload();

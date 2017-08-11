@@ -11,7 +11,7 @@ $('.btn-delete-modal').on('click', function() {
   var markedToDeleteLine = $('.markedToDelete');
   var param = markedToDeleteLine.children('.main-value').text();
   var path = window.location.pathname + '/';
-  //DELETE to /domains/:domain
+  //DELETE to /path/:param
   $.ajax({
     url: path + param,
     type: 'DELETE',

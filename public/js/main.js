@@ -1,52 +1,26 @@
-// register clicklistener for edit
-$('.edit-domain').on('click', function() {
-  console.log($(this).parent().text);
-});
-
 // register clicklistener for delete
-$('.delete-domain').on('click', function() {
+$('.btn-delete').on('click', function() {
   // find the .domain cell in the table row
-  var domainName = $(this).closest('tr').children('.domain').text();
+  $(this).closest('tr').toggleClass('markedToDelete');
   // show modal message
-  showModalMessage('test', () => {
+  $('#deleteModal').modal('show');
+});
 
-  });
-  // DELETE to /domains/:domain
+// If in model delete is clicked the specific domain is deleted and the page reloaded.
+$('.btn-delete-modal').on('click', function() {
+  var markedToDeleteLine = $('.markedToDelete');
+  var param = markedToDeleteLine.children('.main-value').text();
+  var path = window.location.pathname + '/';
+  //DELETE to /domains/:domain
   $.ajax({
-    url: '/domains/' + domainName,
+    url: path + param,
     type: 'DELETE',
     success: function(result) {
-      location.reload();
+      markedToDeleteLine.toggleClass('markedToDelete');
+      $('#deleteModal').modal('hide');
+      $('#deleteModal').on('hidden.bs.modal', function() {
+        location.reload();
+      });
     }
   });
 });
-
-$('.delete-user').on('click', function() {
-  var userEmail = $(this).closest('tr').children('.userEmail').text();
-
-  // delete to /users/:user
-  $.ajax({
-    url: '/users/' + userEmail,
-    type: 'DELETE',
-    success: function(result) {
-      location.reload();
-    }
-  });
-});
-
-
-$('.delete-alias').on('click', function() {
-  var aliasName = $(this).closest('tr').children('.aliasSource').text();
-
-  $.ajax({
-    url: 'alias/' + aliasName,
-    type: 'DELETE',
-    success: function(result) {
-      location.reload();
-    }
-  });
-});
-
-var showModalMessage = function(message, callback) {
-  // TODO
-}

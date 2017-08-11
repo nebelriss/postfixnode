@@ -38,7 +38,6 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:alias', (req, res) => {
-  console.log(req.params.alias);
   alias.deleteByName(req.params.alias, (err, result) => {
     res.status(200).send();
   });

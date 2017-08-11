@@ -12,8 +12,15 @@
       <tr>
         <th scope="row">{{id}}</th>
         <td>{{{name}}}</td>
-        <td class="userEmail">{{email}}</td>
-        <td><i class="fa fa-pencil edit-user" aria-hidden="true"></i><i class="fa fa-trash delete-user" aria-hidden="true"></i></td>
+        <td class="main-value">{{email}}</td>
+        <td>
+          <button type="button" class="btn btn-primary">
+            <i class="fa fa-pencil edit-user" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-primary btn-delete">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
       </tr>
     {{/each}}
   </tbody>

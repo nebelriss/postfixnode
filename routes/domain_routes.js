@@ -7,9 +7,9 @@ const router = express.Router();
 router.get('/', (req, res) => {
   domain.getAll((err, rows) => {
     if (err) {
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
-      res.render('domains.hbs', { rows });
+      res.render('domains.hbs', { rows, domainpath: true });
     }
   });
 });
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   domain.create(req.body.domain, (err, result) => {
     if (err) {
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.status(200).send();
     }

@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
   // get all users
   user.getAll((err, rows) => {
     if (err) {
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.render('users.hbs', {
         rows,

@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
   // get all alias entries
   alias.getAll((err, rows) => {
     if (err) {
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.render('alias.hbs', {
         rows,

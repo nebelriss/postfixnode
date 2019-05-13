@@ -9,16 +9,16 @@
   "author": "Michel Heiniger",
   "license": "GPL-3.0",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
     "express-validator": "^3.2.1",
-    "hbs": "^4.0.1",
-    "mysql": "^2.13.0"
+    "hbs": "^4.0.4",
+    "mysql": "^2.17.1"
   },
   "devDependencies": {
-    "eslint": "^4.3.0",
-    "eslint-config-airbnb-base": "^11.3.1",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.17.2"
   }
 }

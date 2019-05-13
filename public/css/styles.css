@@ -13,3 +13,7 @@ table {
 .fa .fa-pencil {
   margin-right: 25px;
 }
+
+.navbar {
+  height: 80px;
+}

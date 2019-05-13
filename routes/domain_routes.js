@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.render('domains.hbs', { rows, domainpath: true });
+      res.render('domains.hbs', { rows });
     }
   });
 });
